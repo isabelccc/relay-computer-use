@@ -1,0 +1,177 @@
+{
+  "schemaVersion": "1.0",
+  "id": "member-savings-inquiry",
+  "version": "1.0.0",
+  "description": "Read a member’s current savings balance and account status through the core banking UI.",
+  "application": {
+    "vendor": "northstar-core",
+    "version": "2026.1",
+    "entryPath": "/bank"
+  },
+  "inputs": [
+    {
+      "name": "memberId",
+      "type": "string",
+      "pattern": "^\\d{5}$",
+      "sensitive": true,
+      "description": "Five-digit member identifier, supplied privately at invocation."
+    }
+  ],
+  "outputs": [
+    {
+      "name": "availableBalance",
+      "type": "money",
+      "target": {
+        "surface": "browser",
+        "frame": "Core workspace",
+        "strategy": "label",
+        "name": "Available balance",
+        "rationale": "Exact accessible label in the titled frame; independent of element IDs and table position."
+      },
+      "sensitive": true,
+      "description": "Savings balance in USD minor units."
+    },
+    {
+      "name": "accountStatus",
+      "type": "string",
+      "target": {
+        "surface": "browser",
+        "frame": "Core workspace",
+        "strategy": "label",
+        "name": "Account status",
+        "rationale": "Exact accessible label in the titled frame; independent of element IDs and table position."
+      },
+      "sensitive": true,
+      "description": "Current account status."
+    }
+  ],
+  "steps": [
+    {
+      "id": "step-1",
+      "action": {
+        "kind": "fill",
+        "target": {
+          "surface": "browser",
+          "frame": "Core workspace",
+          "strategy": "label",
+          "name": "Member ID",
+          "rationale": "Exact accessible label in the titled frame; independent of element IDs and table position."
+        },
+        "input": "memberId"
+      },
+      "before": {
+        "frame": "Core workspace",
+        "heading": "Member search"
+      },
+      "after": {
+        "frame": "Core workspace",
+        "heading": "Member search"
+      },
+      "timeoutMs": 2500
+    },
+    {
+      "id": "step-2",
+      "action": {
+        "kind": "click",
+        "target": {
+          "surface": "browser",
+          "frame": "Core workspace",
+          "strategy": "role",
+          "role": "button",
+          "name": "Search",
+          "rationale": "Exact accessible role and name, scoped to a titled frame; requires one visible match."
+        }
+      },
+      "before": {
+        "frame": "Core workspace",
+        "heading": "Member search"
+      },
+      "after": {
+        "frame": "Core workspace",
+        "heading": "Search results"
+      },
+      "timeoutMs": 2500
+    },
+    {
+      "id": "step-3",
+      "action": {
+        "kind": "click",
+        "target": {
+          "surface": "browser",
+          "frame": "Core workspace",
+          "strategy": "role",
+          "role": "button",
+          "name": "Open member",
+          "rationale": "Exact accessible role and name, scoped to a titled frame; requires one visible match."
+        }
+      },
+      "before": {
+        "frame": "Core workspace",
+        "heading": "Search results"
+      },
+      "after": {
+        "frame": "Core workspace",
+        "heading": "Member overview"
+      },
+      "timeoutMs": 2500
+    },
+    {
+      "id": "step-4",
+      "action": {
+        "kind": "click",
+        "target": {
+          "surface": "browser",
+          "frame": "Core workspace",
+          "strategy": "role",
+          "role": "button",
+          "name": "View accounts",
+          "rationale": "Exact accessible role and name, scoped to a titled frame; requires one visible match."
+        }
+      },
+      "before": {
+        "frame": "Core workspace",
+        "heading": "Member overview"
+      },
+      "after": {
+        "frame": "Core workspace",
+        "heading": "Member accounts"
+      },
+      "timeoutMs": 2500
+    },
+    {
+      "id": "step-5",
+      "action": {
+        "kind": "click",
+        "target": {
+          "surface": "browser",
+          "frame": "Core workspace",
+          "strategy": "role",
+          "role": "button",
+          "name": "Open savings",
+          "rationale": "Exact accessible role and name, scoped to a titled frame; requires one visible match."
+        }
+      },
+      "before": {
+        "frame": "Core workspace",
+        "heading": "Member accounts"
+      },
+      "after": {
+        "frame": "Core workspace",
+        "heading": "Savings account"
+      },
+      "timeoutMs": 2500
+    }
+  ],
+  "success": {
+    "frame": "Core workspace",
+    "heading": "Savings account"
+  },
+  "policyId": "northstar-read-only-v1",
+  "provenance": {
+    "kind": "hand-authored-example",
+    "provider": "none",
+    "model": "none",
+    "runId": "example",
+    "createdAt": "2026-09-15T00:00:00.000Z"
+  }
+}

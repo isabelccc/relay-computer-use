@@ -1,0 +1,49 @@
+{
+  "id": "northstar-read-only-v1",
+  "paths": ["/bank", "/bank/core", "/bank/style.css", "/bank/core.js"],
+  "actionTypes": ["click", "fill"],
+  "automationClick": [
+    "Search",
+    "Open member",
+    "View accounts",
+    "Open savings",
+    "Back to search",
+    "Try again",
+    "Dismiss notice"
+  ],
+  "humanClick": [
+    "Search",
+    "Open member",
+    "View accounts",
+    "Open savings",
+    "Back to search",
+    "Try again",
+    "Dismiss notice",
+    "Restore session",
+    "Acknowledge"
+  ],
+  "fill": ["Member ID"],
+  "read": ["Available balance", "Account status", "Account type"],
+  "headings": [
+    "Member search",
+    "Search results",
+    "Member overview",
+    "Member accounts",
+    "Savings account",
+    "Member not found",
+    "Permission denied",
+    "Session expired",
+    "Temporary interruption",
+    "Loading",
+    "Operator acknowledgement",
+    "Application error",
+    "Service notice",
+    "Account workspace"
+  ],
+  "irreversible": ["Transfer funds", "Close account", "Submit payment"],
+  "maxSteps": 24,
+  "runTimeoutMs": 180000,
+  "stepTimeoutMs": 2500,
+  "handoffTimeoutMs": 300000,
+  "maxRecoveryAttempts": 2
+}

@@ -1,0 +1,27 @@
+{"seq":1,"time":"2026-09-15T04:20:54.148Z","type":"run_started","actor":"system","code":"replay"}
+{"seq":2,"time":"2026-09-15T04:20:54.149Z","type":"capability_loaded","actor":"automation","digest":"0b7af9753e8f114d2afd5d1e908f96c6fa056f26911f54ba8437f18e0c7f9d54"}
+{"seq":3,"time":"2026-09-15T04:20:54.333Z","type":"checkpoint_verified","actor":"automation","stepId":"step-1","heading":"Member search"}
+{"seq":4,"time":"2026-09-15T04:20:54.333Z","type":"action_started","actor":"automation","stepId":"step-1","target":"Member ID","action":"fill","epoch":0}
+{"seq":5,"time":"2026-09-15T04:20:54.343Z","type":"action_completed","actor":"automation","stepId":"step-1","target":"Member ID","action":"fill","epoch":0}
+{"seq":6,"time":"2026-09-15T04:20:54.346Z","type":"checkpoint_verified","actor":"automation","stepId":"step-1","heading":"Member search"}
+{"seq":7,"time":"2026-09-15T04:20:54.349Z","type":"checkpoint_verified","actor":"automation","stepId":"step-2","heading":"Member search"}
+{"seq":8,"time":"2026-09-15T04:20:54.349Z","type":"action_started","actor":"automation","stepId":"step-2","target":"Search","action":"click","epoch":0}
+{"seq":9,"time":"2026-09-15T04:20:54.397Z","type":"action_completed","actor":"automation","stepId":"step-2","target":"Search","action":"click","epoch":0}
+{"seq":10,"time":"2026-09-15T04:20:54.400Z","type":"recovery","actor":"automation","stepId":"step-2","code":"KNOWN_INTERSTITIAL","heading":"Temporary interruption"}
+{"seq":11,"time":"2026-09-15T04:20:54.400Z","type":"action_started","actor":"automation","stepId":"step-2","target":"Try again","action":"click","epoch":0}
+{"seq":12,"time":"2026-09-15T04:20:54.416Z","type":"action_completed","actor":"automation","stepId":"step-2","target":"Try again","action":"click","epoch":0}
+{"seq":13,"time":"2026-09-15T04:20:54.419Z","type":"checkpoint_verified","actor":"automation","stepId":"step-2","heading":"Search results"}
+{"seq":14,"time":"2026-09-15T04:20:54.423Z","type":"checkpoint_verified","actor":"automation","stepId":"step-3","heading":"Search results"}
+{"seq":15,"time":"2026-09-15T04:20:54.423Z","type":"action_started","actor":"automation","stepId":"step-3","target":"Open member","action":"click","epoch":0}
+{"seq":16,"time":"2026-09-15T04:20:54.440Z","type":"action_completed","actor":"automation","stepId":"step-3","target":"Open member","action":"click","epoch":0}
+{"seq":17,"time":"2026-09-15T04:20:54.443Z","type":"checkpoint_verified","actor":"automation","stepId":"step-3","heading":"Member overview"}
+{"seq":18,"time":"2026-09-15T04:20:54.446Z","type":"checkpoint_verified","actor":"automation","stepId":"step-4","heading":"Member overview"}
+{"seq":19,"time":"2026-09-15T04:20:54.446Z","type":"action_started","actor":"automation","stepId":"step-4","target":"View accounts","action":"click","epoch":0}
+{"seq":20,"time":"2026-09-15T04:20:54.465Z","type":"action_completed","actor":"automation","stepId":"step-4","target":"View accounts","action":"click","epoch":0}
+{"seq":21,"time":"2026-09-15T04:20:54.468Z","type":"checkpoint_verified","actor":"automation","stepId":"step-4","heading":"Member accounts"}
+{"seq":22,"time":"2026-09-15T04:20:54.471Z","type":"checkpoint_verified","actor":"automation","stepId":"step-5","heading":"Member accounts"}
+{"seq":23,"time":"2026-09-15T04:20:54.471Z","type":"action_started","actor":"automation","stepId":"step-5","target":"Open savings","action":"click","epoch":0}
+{"seq":24,"time":"2026-09-15T04:20:54.491Z","type":"action_completed","actor":"automation","stepId":"step-5","target":"Open savings","action":"click","epoch":0}
+{"seq":25,"time":"2026-09-15T04:20:54.494Z","type":"checkpoint_verified","actor":"automation","stepId":"step-5","heading":"Savings account"}
+{"seq":26,"time":"2026-09-15T04:20:54.498Z","type":"checkpoint_verified","actor":"automation","stepId":"success","heading":"Savings account"}
+{"seq":27,"time":"2026-09-15T04:20:54.504Z","type":"run_completed","actor":"system","code":"SUCCESS"}

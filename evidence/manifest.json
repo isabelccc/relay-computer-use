@@ -1,0 +1,94 @@
+{
+  "generatedAt": "2026-09-15T04:21:01.157Z",
+  "liveDiscovery": {
+    "status": "blocked",
+    "reason": "Anthropic requires a workspace ID for the configured unscoped key. A successful live discovery run has not yet been captured."
+  },
+  "replays": [
+    {
+      "runId": "420af12d-cfdc-4faf-b9a2-5a4b18a2193b",
+      "scenario": "normal",
+      "status": "success",
+      "code": "SUCCESS",
+      "modelCalls": 0,
+      "operator": null
+    },
+    {
+      "runId": "6d280753-dc3c-4a15-bcfe-c541f3318495",
+      "scenario": "not-found",
+      "status": "business_outcome",
+      "code": "MEMBER_NOT_FOUND",
+      "modelCalls": 0,
+      "operator": null
+    },
+    {
+      "runId": "1ba4f069-0b25-489c-b87f-e0f194e296ae",
+      "scenario": "transient",
+      "status": "success",
+      "code": "SUCCESS",
+      "modelCalls": 0,
+      "operator": null
+    },
+    {
+      "runId": "9d7cd3e6-c119-4382-9e4c-3ee8b1b109bf",
+      "scenario": "slow",
+      "status": "success",
+      "code": "SUCCESS",
+      "modelCalls": 0,
+      "operator": null
+    },
+    {
+      "runId": "8fab8507-42c8-47b0-8d40-9d34ec84129d",
+      "scenario": "permission",
+      "status": "failure",
+      "code": "PERMISSION_DENIED",
+      "modelCalls": 0,
+      "operator": null
+    },
+    {
+      "runId": "28331897-6538-4fc4-b256-4bd51aa9d63e",
+      "scenario": "app-error",
+      "status": "failure",
+      "code": "APPLICATION_ERROR",
+      "modelCalls": 0,
+      "operator": null
+    },
+    {
+      "runId": "4b67184d-de4c-480d-8295-4caeb6f3f60c",
+      "scenario": "ambiguous",
+      "status": "failure",
+      "code": "AMBIGUOUS_TARGET",
+      "modelCalls": 0,
+      "operator": null
+    },
+    {
+      "runId": "21d70580-12e4-4744-9ad1-3c57e8414af6",
+      "scenario": "drift",
+      "status": "failure",
+      "code": "CHECKPOINT_TIMEOUT",
+      "modelCalls": 0,
+      "operator": null
+    },
+    {
+      "runId": "4dbda4aa-f286-4aef-8e98-81661b06c3c6",
+      "scenario": "session",
+      "status": "success",
+      "code": "SUCCESS",
+      "modelCalls": 0,
+      "operator": "scripted simulation"
+    },
+    {
+      "runId": "0e695abd-c5cb-466a-a599-f1fec60798a8",
+      "scenario": "dialog",
+      "status": "success",
+      "code": "SUCCESS",
+      "modelCalls": 0,
+      "operator": "scripted simulation"
+    }
+  ],
+  "consoleHandoff": {
+    "runId": "400db487-86e4-4143-99d3-7ff6fb7ae5e3",
+    "operator": "Console exercised by development assistant through browser controls, not a claim that a person performed the demonstration."
+  },
+  "privacy": "All persisted member outputs are redacted. Screenshots are not stored. Demo handoff runs explicitly label their scripted operator."
+}

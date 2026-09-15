@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#172321" />
+    <title>Relay — Computer-use operations</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <a class="brand" href="/" aria-label="Relay home"
+          ><span class="brand-mark">r<span>↗</span></span
+          >relay<span class="version">LAB</span></a
+        >
+        <div class="workspace-label">WORKSPACE</div>
+        <nav>
+          <button class="nav-item active" data-page="operations">
+            <span>▦</span> Operations <kbd>01</kbd></button
+          ><button class="nav-item" data-page="capabilities">
+            <span>◇</span> Capabilities <kbd id="cap-count">1</kbd></button
+          ><button class="nav-item" data-page="policy"><span>⊡</span> Safety & policy</button>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="environment-dot"></div>
+          <div>Local environment<small>Northstar Core · 2026.1</small></div>
+        </div>
+      </aside>
+      <div class="main-shell">
+        <header class="topbar">
+          <div>
+            <span class="muted">Workspace</span><span class="slash">/</span
+            ><span id="breadcrumb">Operations</span>
+          </div>
+          <div class="topbar-right">
+            <span class="environment-pill">SANDBOX</span><span class="avatar">OP</span>
+          </div>
+        </header>
+        <main>
+          <section id="operations-page">
+            <div class="page-heading">
+              <div>
+                <p class="eyebrow">COMPUTER-USE OPERATIONS</p>
+                <h1>Discover once. Run reliably.</h1>
+                <p class="subtitle">
+                  Turn a successful UI journey into a capability you can trust.
+                </p>
+              </div>
+              <button id="new-run" class="button primary"><span>＋</span> New run</button>
+            </div>
+            <div class="summary-row">
+              <div>
+                <span class="metric-label">CAPABILITIES</span
+                ><strong id="metric-capabilities">1<span>ready to replay</span></strong>
+              </div>
+              <div>
+                <span class="metric-label">RUNS THIS SESSION</span
+                ><strong id="metric-runs">0<span>tracked end to end</span></strong>
+              </div>
+              <div>
+                <span class="metric-label">NEEDS ATTENTION</span
+                ><strong id="metric-attention">0<span>awaiting an operator</span></strong>
+              </div>
+              <div class="engine-state">
+                <span class="pulse-dot"></span>
+                <div>
+                  <strong>Replay engine ready</strong
+                  ><small id="provider-status">Checking model connection…</small>
+                </div>
+              </div>
+            </div>
+            <div class="operations-grid">
+              <section class="run-panel">
+                <div class="section-heading">
+                  <h2>Run activity</h2>
+                  <span class="live-label">● LIVE</span>
+                </div>
+                <div id="run-list"></div>
+                <div id="run-empty" class="empty-runs">
+                  <div class="empty-icon">↗</div>
+                  <h3>Your first run starts here</h3>
+                  <p>Discover a workflow with a model, or replay the saved member inquiry.</p>
+                  <button id="quick-replay" class="button secondary">
+                    Run saved capability <span>→</span>
+                  </button>
+                  <div class="small-note">No model key needed for replay</div>
+                </div>
+              </section>
+              <section class="workspace-panel">
+                <div class="workspace-top">
+                  <div>
+                    <span id="detail-status" class="status neutral">READY</span>
+                    <h2 id="detail-title">Member savings inquiry</h2>
+                  </div>
+                  <div id="detail-actions"></div>
+                </div>
+                <div class="detail-tabs">
+                  <button class="selected" data-tab="session">Live session</button
+                  ><button data-tab="timeline">Activity log</button
+                  ><button data-tab="artifact">Capability</button>
+                  <div id="ownership" class="ownership">Policy enforced</div>
+                </div>
+                <div id="session-tab">
+                  <div class="session-address">
+                    <span class="three-dots">● ● ●</span
+                    ><span>northstar-core / member-services</span
+                    ><span class="session-tag">ISOLATED SESSION</span>
+                  </div>
+                  <div id="session-image-wrap" class="session-image-wrap">
+                    <img
+                      id="session-image"
+                      alt="Live browser session showing the Northstar training application"
+                      hidden
+                    />
+                    <div id="session-placeholder">
+                      <div class="preview-brand">✳ NORTHSTAR CORE</div>
+                      <div class="preview-line"></div>
+                      <div class="preview-content">
+                        <span>MEMBER SERVICES</span>
+                        <h3>A real browser.<br />A repeatable workflow.</h3>
+                        <p>Search → Member → Accounts → Savings</p>
+                        <div class="preview-fields">
+                          <div>Member ID <b>•••••</b></div>
+                          <div>Available balance <b>••••••</b></div>
+                        </div>
+                      </div>
+                      <div class="preview-footer">Synthetic training data · UI-only access</div>
+                    </div>
+                  </div>
+                  <div id="handoff-panel" hidden></div>
+                  <div id="result-panel" class="result-panel" hidden></div>
+                  <div class="session-bottom">
+                    <span id="session-caption">Each run gets its own browser context.</span
+                    ><span class="safe-caption">◇ Read-only policy</span>
+                  </div>
+                </div>
+                <div id="timeline-tab" class="tab-content" hidden></div>
+                <div id="artifact-tab" class="tab-content" hidden></div>
+              </section>
+            </div>
+            <div class="bottom-note">
+              <span>01 / DISCOVER</span><i>→</i><span>02 / RECORD</span><i>→</i
+              ><span>03 / REPLAY</span>
+              <p>The model learns the path. The engine follows the contract.</p>
+            </div>
+          </section>
+          <section id="capabilities-page" hidden>
+            <div class="page-heading">
+              <div>
+                <p class="eyebrow">CAPABILITY LIBRARY</p>
+                <h1>One journey. Many invocations.</h1>
+                <p class="subtitle">
+                  Versioned contracts with typed inputs, outputs, and verified checkpoints.
+                </p>
+              </div>
+            </div>
+            <div id="catalog"></div>
+          </section>
+          <section id="policy-page" hidden>
+            <div class="page-heading">
+              <div>
+                <p class="eyebrow">EXECUTION BOUNDARY</p>
+                <h1>Permission before action.</h1>
+                <p class="subtitle">
+                  A policy applies to every action, during discovery and replay.
+                </p>
+              </div>
+            </div>
+            <div class="policy-layout">
+              <section class="policy-intro">
+                <span class="status success">ENFORCED</span>
+                <h2>northstar-read-only-v1</h2>
+                <p>
+                  Automation can find a member, open an account, and read its balance. Risky actions
+                  stop at the policy boundary.
+                </p>
+                <div class="policy-fact">
+                  <b>Network</b
+                  ><span
+                    >Exact local origin + four approved routes. Other requests, WebSockets, popups,
+                    and downloads are blocked.</span
+                  >
+                </div>
+                <div class="policy-fact">
+                  <b>Control</b
+                  ><span
+                    >Only one owner. Human takeover requires a lease, and resume verifies the
+                    expected checkpoint.</span
+                  >
+                </div>
+                <div class="policy-fact">
+                  <b>Evidence</b
+                  ><span
+                    >Static labels and structural state are retained. Input values, account
+                    balances, credentials, and raw page content are excluded.</span
+                  >
+                </div>
+              </section>
+              <section class="policy-rules">
+                <h3>Allowed for automation</h3>
+                <div class="rule good">✓ <span>Search and navigate member records</span></div>
+                <div class="rule good">✓ <span>Fill a parameterized member identifier</span></div>
+                <div class="rule good">✓ <span>Read declared account outputs</span></div>
+                <div class="rule good">✓ <span>Retry a known transient interruption</span></div>
+                <h3>Requires an operator</h3>
+                <div class="rule attention">↗ <span>Restore an expired session</span></div>
+                <div class="rule attention">↗ <span>Acknowledge an unexpected notice</span></div>
+                <h3>Blocked for every actor</h3>
+                <div class="rule blocked">
+                  × <span>Transfer funds, close accounts, submit payments</span>
+                </div>
+                <div class="rule blocked">
+                  × <span>Navigate outside the approved application</span>
+                </div>
+              </section>
+            </div>
+          </section>
+        </main>
+        <footer class="main-footer">
+          <span>RELAY / COMPUTER-USE AUTOMATION</span
+          ><span>Built for a clear contract between intent and action.</span>
+        </footer>
+      </div>
+    </div>
+    <dialog id="run-dialog">
+      <form id="run-form">
+        <div class="dialog-top">
+          <div>
+            <p class="eyebrow">START A WORKFLOW</p>
+            <h2>New run</h2>
+          </div>
+          <button type="button" id="close-dialog" class="icon-button" aria-label="Close">×</button>
+        </div>
+        <div class="mode-switch">
+          <label
+            ><input type="radio" name="mode" value="replay" checked /><span
+              >↻ Replay capability<small>Deterministic · no model calls</small></span
+            ></label
+          ><label
+            ><input type="radio" name="mode" value="discovery" /><span
+              >✧ Discover workflow<small>Live model · observe and act</small></span
+            ></label
+          >
+        </div>
+        <label class="field"
+          >Target application<input
+            name="targetUrl"
+            type="url"
+            value="http://127.0.0.1:4317/bank"
+            required /></label
+        ><label class="field"
+          >Member ID<input
+            name="memberId"
+            value="10002"
+            pattern="[0-9]{5}"
+            maxlength="5"
+            required
+          /><small>Synthetic members: 10001 and 10002. Try 99999 for not found.</small></label
+        ><label class="field" id="goal-field" hidden
+          >Goal<textarea name="goal" rows="3">
+Find the member identified by memberId and read their current savings available balance and account status.</textarea
+          >
+        </label>
+        <div class="form-columns">
+          <label class="field"
+            >Runtime scenario<select name="scenario">
+              <option value="normal">Normal operation</option>
+              <option value="not-found">Member not found</option>
+              <option value="transient">Transient interruption</option>
+              <option value="slow">Slow loading</option>
+              <option value="session">Expired session · handoff</option>
+              <option value="dialog">Unexpected notice · handoff</option>
+              <option value="permission">Permission denied</option>
+              <option value="app-error">Application failure</option>
+              <option value="ambiguous">Ambiguous control</option>
+              <option value="drift">Changed checkpoint</option>
+            </select></label
+          ><label class="field"
+            >Application variant<select name="variant">
+              <option value="base">Northstar / Base</option>
+              <option value="alternate">Northstar / Alternate styling</option>
+            </select></label
+          >
+        </div>
+        <p id="form-error" class="error-message" role="alert" hidden></p>
+        <div class="dialog-footer">
+          <span>◇ Synthetic data only</span
+          ><button class="button primary" type="submit">Start run →</button>
+        </div>
+      </form>
+    </dialog>
+    <div id="toast" role="status" hidden></div>
+    <script src="/app.js"></script>
+  </body>
+</html>

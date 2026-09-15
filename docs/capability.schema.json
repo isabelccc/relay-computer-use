@@ -1,0 +1,342 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-zA-Z0-9_-]{0,63}$"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "application": {
+      "type": "object",
+      "properties": {
+        "vendor": {
+          "type": "string",
+          "const": "northstar-core"
+        },
+        "version": {
+          "type": "string",
+          "const": "2026.1"
+        },
+        "entryPath": {
+          "type": "string",
+          "const": "/bank"
+        }
+      },
+      "required": ["vendor", "version", "entryPath"],
+      "additionalProperties": false
+    },
+    "inputs": {
+      "minItems": 1,
+      "maxItems": 8,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z][a-zA-Z0-9_-]{0,63}$"
+          },
+          "type": {
+            "type": "string",
+            "const": "string"
+          },
+          "pattern": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "sensitive": {
+            "type": "boolean",
+            "const": true
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 200
+          }
+        },
+        "required": ["name", "type", "pattern", "sensitive", "description"],
+        "additionalProperties": false
+      }
+    },
+    "outputs": {
+      "minItems": 1,
+      "maxItems": 8,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "pattern": "^[a-z][a-zA-Z0-9_-]{0,63}$"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["money", "string"]
+          },
+          "target": {
+            "type": "object",
+            "properties": {
+              "surface": {
+                "type": "string",
+                "const": "browser"
+              },
+              "frame": {
+                "type": "string",
+                "maxLength": 80
+              },
+              "strategy": {
+                "type": "string",
+                "enum": ["role", "label"]
+              },
+              "role": {
+                "type": "string",
+                "enum": ["button", "link", "textbox", "heading"]
+              },
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+              },
+              "rationale": {
+                "type": "string",
+                "maxLength": 240
+              }
+            },
+            "required": ["surface", "frame", "strategy", "name", "rationale"],
+            "additionalProperties": false
+          },
+          "sensitive": {
+            "type": "boolean",
+            "const": true
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 200
+          }
+        },
+        "required": ["name", "type", "target", "sensitive", "description"],
+        "additionalProperties": false
+      }
+    },
+    "steps": {
+      "minItems": 1,
+      "maxItems": 40,
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-zA-Z0-9_-]{0,63}$"
+          },
+          "action": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "const": "click"
+                  },
+                  "target": {
+                    "type": "object",
+                    "properties": {
+                      "surface": {
+                        "type": "string",
+                        "const": "browser"
+                      },
+                      "frame": {
+                        "type": "string",
+                        "maxLength": 80
+                      },
+                      "strategy": {
+                        "type": "string",
+                        "enum": ["role", "label"]
+                      },
+                      "role": {
+                        "type": "string",
+                        "enum": ["button", "link", "textbox", "heading"]
+                      },
+                      "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 100
+                      },
+                      "rationale": {
+                        "type": "string",
+                        "maxLength": 240
+                      }
+                    },
+                    "required": ["surface", "frame", "strategy", "name", "rationale"],
+                    "additionalProperties": false
+                  }
+                },
+                "required": ["kind", "target"],
+                "additionalProperties": false
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "const": "fill"
+                  },
+                  "target": {
+                    "type": "object",
+                    "properties": {
+                      "surface": {
+                        "type": "string",
+                        "const": "browser"
+                      },
+                      "frame": {
+                        "type": "string",
+                        "maxLength": 80
+                      },
+                      "strategy": {
+                        "type": "string",
+                        "enum": ["role", "label"]
+                      },
+                      "role": {
+                        "type": "string",
+                        "enum": ["button", "link", "textbox", "heading"]
+                      },
+                      "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 100
+                      },
+                      "rationale": {
+                        "type": "string",
+                        "maxLength": 240
+                      }
+                    },
+                    "required": ["surface", "frame", "strategy", "name", "rationale"],
+                    "additionalProperties": false
+                  },
+                  "input": {
+                    "type": "string",
+                    "pattern": "^[a-z][a-zA-Z0-9_-]{0,63}$"
+                  }
+                },
+                "required": ["kind", "target", "input"],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "before": {
+            "type": "object",
+            "properties": {
+              "frame": {
+                "type": "string",
+                "maxLength": 80
+              },
+              "heading": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+              }
+            },
+            "required": ["frame", "heading"],
+            "additionalProperties": false
+          },
+          "after": {
+            "type": "object",
+            "properties": {
+              "frame": {
+                "type": "string",
+                "maxLength": 80
+              },
+              "heading": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 100
+              }
+            },
+            "required": ["frame", "heading"],
+            "additionalProperties": false
+          },
+          "timeoutMs": {
+            "type": "integer",
+            "minimum": 100,
+            "maximum": 15000
+          }
+        },
+        "required": ["id", "action", "before", "after", "timeoutMs"],
+        "additionalProperties": false
+      }
+    },
+    "success": {
+      "type": "object",
+      "properties": {
+        "frame": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "heading": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        }
+      },
+      "required": ["frame", "heading"],
+      "additionalProperties": false
+    },
+    "policyId": {
+      "type": "string",
+      "const": "northstar-read-only-v1"
+    },
+    "provenance": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["llm-discovery", "hand-authored-example"]
+        },
+        "provider": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "model": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "runId": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+        }
+      },
+      "required": ["kind", "provider", "model", "runId", "createdAt"],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "version",
+    "description",
+    "application",
+    "inputs",
+    "outputs",
+    "steps",
+    "success",
+    "policyId",
+    "provenance"
+  ],
+  "additionalProperties": false
+}

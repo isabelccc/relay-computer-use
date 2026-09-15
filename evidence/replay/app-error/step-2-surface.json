@@ -1,0 +1,12 @@
+{
+  "kind": "redacted-ui-projection",
+  "runId": "28331897-6538-4fc4-b256-4bd51aa9d63e",
+  "stepId": "step-2",
+  "redaction": "Only approved static labels, roles, frame names and bounds are retained. All field values and unrecognized page text are excluded.",
+  "checkpoint": {
+    "frame": "Core workspace",
+    "heading": "Application error"
+  },
+  "controls": [],
+  "observedAt": "2026-09-15T04:20:56.422Z"
+}

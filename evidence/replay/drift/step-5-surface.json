@@ -1,0 +1,105 @@
+{
+  "kind": "redacted-ui-projection",
+  "runId": "21d70580-12e4-4744-9ad1-3c57e8414af6",
+  "stepId": "step-5",
+  "redaction": "Only approved static labels, roles, frame names and bounds are retained. All field values and unrecognized page text are excluded.",
+  "checkpoint": {
+    "frame": "Core workspace",
+    "heading": "Account workspace"
+  },
+  "controls": [
+    {
+      "id": "3bd6f8ad20b9",
+      "target": {
+        "surface": "browser",
+        "frame": "Core workspace",
+        "strategy": "role",
+        "role": "button",
+        "name": "Back to search",
+        "rationale": "Exact accessible role and name, scoped to a titled frame; requires one visible match."
+      },
+      "writable": false,
+      "readable": false,
+      "bounds": {
+        "x": 269,
+        "y": 562.5625,
+        "width": 123.390625,
+        "height": 36
+      }
+    },
+    {
+      "id": "af674c991bc8",
+      "target": {
+        "surface": "browser",
+        "frame": "Core workspace",
+        "strategy": "role",
+        "role": "button",
+        "name": "Transfer funds",
+        "rationale": "Exact accessible role and name, scoped to a titled frame; requires one visible match."
+      },
+      "writable": false,
+      "readable": false,
+      "bounds": {
+        "x": 392.390625,
+        "y": 561.5625,
+        "width": 123.359375,
+        "height": 38
+      }
+    },
+    {
+      "id": "17cacdc71908",
+      "target": {
+        "surface": "browser",
+        "frame": "Core workspace",
+        "strategy": "label",
+        "name": "Available balance",
+        "rationale": "Exact accessible label in the titled frame; independent of element IDs and table position."
+      },
+      "writable": false,
+      "readable": true,
+      "bounds": {
+        "x": 392.0625,
+        "y": 372.78125,
+        "width": 174,
+        "height": 42.796875
+      }
+    },
+    {
+      "id": "0339b7999af4",
+      "target": {
+        "surface": "browser",
+        "frame": "Core workspace",
+        "strategy": "label",
+        "name": "Account status",
+        "rationale": "Exact accessible label in the titled frame; independent of element IDs and table position."
+      },
+      "writable": false,
+      "readable": true,
+      "bounds": {
+        "x": 378.421875,
+        "y": 446.578125,
+        "width": 174,
+        "height": 42.796875
+      }
+    },
+    {
+      "id": "8293109bf01d",
+      "target": {
+        "surface": "browser",
+        "frame": "Core workspace",
+        "strategy": "label",
+        "name": "Account type",
+        "rationale": "Exact accessible label in the titled frame; independent of element IDs and table position."
+      },
+      "writable": false,
+      "readable": true,
+      "bounds": {
+        "x": 367.96875,
+        "y": 298.984375,
+        "width": 174,
+        "height": 42.796875
+      }
+    }
+  ],
+  "observedAt": "2026-09-15T04:20:59.688Z"
+}

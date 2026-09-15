@@ -1,0 +1,11 @@
+{
+  "status": "failure",
+  "code": "CHECKPOINT_TIMEOUT",
+  "stepId": "step-5",
+  "expected": {
+    "frame": "Core workspace",
+    "heading": "Savings account"
+  },
+  "observed": "Account workspace",
+  "evidence": "step-5-surface.json"
+}

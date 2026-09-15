@@ -1,0 +1,32 @@
+{
+  "kind": "redacted-ui-projection",
+  "runId": "4dbda4aa-f286-4aef-8e98-81661b06c3c6",
+  "stepId": "step-3",
+  "redaction": "Only approved static labels, roles, frame names and bounds are retained. All field values and unrecognized page text are excluded.",
+  "checkpoint": {
+    "frame": "Core workspace",
+    "heading": "Session expired"
+  },
+  "controls": [
+    {
+      "id": "c1d55fb3c31b",
+      "target": {
+        "surface": "browser",
+        "frame": "Core workspace",
+        "strategy": "role",
+        "role": "button",
+        "name": "Restore session",
+        "rationale": "Exact accessible role and name, scoped to a titled frame; requires one visible match."
+      },
+      "writable": false,
+      "readable": false,
+      "bounds": {
+        "x": 269,
+        "y": 333.984375,
+        "width": 130.71875,
+        "height": 36
+      }
+    }
+  ],
+  "observedAt": "2026-09-15T04:21:00.022Z"
+}

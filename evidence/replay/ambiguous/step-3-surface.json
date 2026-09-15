@@ -1,0 +1,27 @@
+{
+  "kind": "redacted-ui-projection",
+  "runId": "4b67184d-de4c-480d-8295-4caeb6f3f60c",
+  "stepId": "step-3",
+  "redaction": "Only approved static labels, roles, frame names and bounds are retained. All field values and unrecognized page text are excluded.",
+  "checkpoint": {
+    "frame": "Core workspace",
+    "heading": "Search results"
+  },
+  "controls": [
+    {
+      "id": "9b4ed615a81a",
+      "target": {
+        "surface": "browser",
+        "frame": "Core workspace",
+        "strategy": "role",
+        "role": "button",
+        "name": "Open member",
+        "rationale": "Exact accessible role and name, scoped to a titled frame; requires one visible match."
+      },
+      "writable": false,
+      "readable": false,
+      "bounds": null
+    }
+  ],
+  "observedAt": "2026-09-15T04:20:56.728Z"
+}

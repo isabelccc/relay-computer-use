@@ -1,0 +1,39 @@
+{
+  "name": "relay-computer-use",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Discover once. Replay with confidence. A policy-bound computer-use capability engine.",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "start": "tsx src/server.ts",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test --test-concurrency=1 tests/*.test.ts",
+    "demo": "tsx scripts/demo.ts",
+    "discover": "tsx scripts/discover.ts",
+    "replay": "tsx scripts/replay.ts",
+    "schema": "tsx scripts/schema.ts",
+    "check": "npm run typecheck && npm test",
+    "format": "prettier --write src tests scripts public config docs/capability.schema.json package.json tsconfig.json .github",
+    "format:check": "prettier --check src tests scripts public config docs/capability.schema.json package.json tsconfig.json .github",
+    "start:prod": "node dist/src/server.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "openai": "^6.0.0",
+    "playwright": "1.58.2",
+    "zod": "^4.1.12"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/node": "^22.18.0",
+    "prettier": "3.6.2",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3"
+  }
+}

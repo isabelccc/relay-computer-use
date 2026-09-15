@@ -1,0 +1,11 @@
+{
+  "status": "failure",
+  "code": "APPLICATION_ERROR",
+  "stepId": "step-2",
+  "expected": {
+    "frame": "Core workspace",
+    "heading": "Search results"
+  },
+  "observed": "Application error",
+  "evidence": "step-2-surface.json"
+}

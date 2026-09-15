@@ -1,0 +1,32 @@
+{
+  "kind": "redacted-ui-projection",
+  "runId": "0e695abd-c5cb-466a-a599-f1fec60798a8",
+  "stepId": "step-3",
+  "redaction": "Only approved static labels, roles, frame names and bounds are retained. All field values and unrecognized page text are excluded.",
+  "checkpoint": {
+    "frame": "Core workspace",
+    "heading": "Operator acknowledgement"
+  },
+  "controls": [
+    {
+      "id": "b08fa49279cf",
+      "target": {
+        "surface": "browser",
+        "frame": "Core workspace",
+        "strategy": "role",
+        "role": "button",
+        "name": "Acknowledge",
+        "rationale": "Exact accessible role and name, scoped to a titled frame; requires one visible match."
+      },
+      "writable": false,
+      "readable": false,
+      "bounds": {
+        "x": 269,
+        "y": 333.984375,
+        "width": 115.359375,
+        "height": 36
+      }
+    }
+  ],
+  "observedAt": "2026-09-15T04:21:00.419Z"
+}

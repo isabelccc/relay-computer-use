@@ -1,0 +1,29 @@
+{"seq":1,"time":"2026-09-15T04:14:33.336Z","type":"run_started","actor":"system","code":"replay"}
+{"seq":2,"time":"2026-09-15T04:14:33.336Z","type":"capability_loaded","actor":"automation","digest":"0b7af9753e8f114d2afd5d1e908f96c6fa056f26911f54ba8437f18e0c7f9d54"}
+{"seq":3,"time":"2026-09-15T04:14:33.548Z","type":"checkpoint_verified","actor":"automation","stepId":"step-1","heading":"Member search"}
+{"seq":4,"time":"2026-09-15T04:14:33.549Z","type":"action_started","actor":"automation","stepId":"step-1","target":"Member ID","action":"fill","epoch":0}
+{"seq":5,"time":"2026-09-15T04:14:33.558Z","type":"action_completed","actor":"automation","stepId":"step-1","target":"Member ID","action":"fill","epoch":0}
+{"seq":6,"time":"2026-09-15T04:14:33.560Z","type":"checkpoint_verified","actor":"automation","stepId":"step-1","heading":"Member search"}
+{"seq":7,"time":"2026-09-15T04:14:33.562Z","type":"checkpoint_verified","actor":"automation","stepId":"step-2","heading":"Member search"}
+{"seq":8,"time":"2026-09-15T04:14:33.562Z","type":"action_started","actor":"automation","stepId":"step-2","target":"Search","action":"click","epoch":0}
+{"seq":9,"time":"2026-09-15T04:14:33.614Z","type":"action_completed","actor":"automation","stepId":"step-2","target":"Search","action":"click","epoch":0}
+{"seq":10,"time":"2026-09-15T04:14:33.617Z","type":"checkpoint_verified","actor":"automation","stepId":"step-2","heading":"Search results"}
+{"seq":11,"time":"2026-09-15T04:14:33.620Z","type":"checkpoint_verified","actor":"automation","stepId":"step-3","heading":"Search results"}
+{"seq":12,"time":"2026-09-15T04:14:33.620Z","type":"action_started","actor":"automation","stepId":"step-3","target":"Open member","action":"click","epoch":0}
+{"seq":13,"time":"2026-09-15T04:14:33.632Z","type":"action_completed","actor":"automation","stepId":"step-3","target":"Open member","action":"click","epoch":0}
+{"seq":14,"time":"2026-09-15T04:14:33.655Z","type":"intervention_requested","actor":"system","stepId":"step-3","code":"OPERATOR_REQUIRED","heading":"Session expired","epoch":1}
+{"seq":15,"time":"2026-09-15T04:14:44.160Z","type":"control_claimed","actor":"human","epoch":2,"stepId":"step-3"}
+{"seq":16,"time":"2026-09-15T04:14:46.617Z","type":"action_started","actor":"human","stepId":"step-3","target":"Restore session","action":"click","epoch":2}
+{"seq":17,"time":"2026-09-15T04:14:46.634Z","type":"action_completed","actor":"human","stepId":"step-3","target":"Restore session","action":"click","epoch":2}
+{"seq":18,"time":"2026-09-15T04:14:49.079Z","type":"control_returned","actor":"human","stepId":"step-3","heading":"Member overview","epoch":2}
+{"seq":19,"time":"2026-09-15T04:14:49.083Z","type":"checkpoint_verified","actor":"automation","stepId":"step-3","heading":"Member overview"}
+{"seq":20,"time":"2026-09-15T04:14:49.085Z","type":"checkpoint_verified","actor":"automation","stepId":"step-4","heading":"Member overview"}
+{"seq":21,"time":"2026-09-15T04:14:49.085Z","type":"action_started","actor":"automation","stepId":"step-4","target":"View accounts","action":"click","epoch":3}
+{"seq":22,"time":"2026-09-15T04:14:49.112Z","type":"action_completed","actor":"automation","stepId":"step-4","target":"View accounts","action":"click","epoch":3}
+{"seq":23,"time":"2026-09-15T04:14:49.115Z","type":"checkpoint_verified","actor":"automation","stepId":"step-4","heading":"Member accounts"}
+{"seq":24,"time":"2026-09-15T04:14:49.117Z","type":"checkpoint_verified","actor":"automation","stepId":"step-5","heading":"Member accounts"}
+{"seq":25,"time":"2026-09-15T04:14:49.117Z","type":"action_started","actor":"automation","stepId":"step-5","target":"Open savings","action":"click","epoch":3}
+{"seq":26,"time":"2026-09-15T04:14:49.134Z","type":"action_completed","actor":"automation","stepId":"step-5","target":"Open savings","action":"click","epoch":3}
+{"seq":27,"time":"2026-09-15T04:14:49.136Z","type":"checkpoint_verified","actor":"automation","stepId":"step-5","heading":"Savings account"}
+{"seq":28,"time":"2026-09-15T04:14:49.138Z","type":"checkpoint_verified","actor":"automation","stepId":"success","heading":"Savings account"}
+{"seq":29,"time":"2026-09-15T04:14:49.144Z","type":"run_completed","actor":"system","code":"SUCCESS"}

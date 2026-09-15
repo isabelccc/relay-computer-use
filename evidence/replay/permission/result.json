@@ -1,0 +1,11 @@
+{
+  "status": "failure",
+  "code": "PERMISSION_DENIED",
+  "stepId": "step-2",
+  "expected": {
+    "frame": "Core workspace",
+    "heading": "Search results"
+  },
+  "observed": "Permission denied",
+  "evidence": "step-2-surface.json"
+}

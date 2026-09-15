@@ -1,0 +1,19 @@
+{
+  "verifiedAt": "2026-09-15",
+  "checks": {
+    "strictTypeScript": "passed",
+    "tests": {
+      "passed": 28,
+      "failed": 0
+    },
+    "productionBuild": "passed",
+    "compiledServerReplay": "passed",
+    "formatting": "passed",
+    "runtimeDependencyAudit": {
+      "knownVulnerabilities": 0
+    },
+    "sourceAndEvidenceSecretScan": "passed"
+  },
+  "liveDiscovery": "blocked: ANTHROPIC_WORKSPACE_ID required by configured key",
+  "ci": "Workflow included; GitHub-hosted CI has not been run."
+}

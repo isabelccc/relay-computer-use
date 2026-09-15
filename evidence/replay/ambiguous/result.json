@@ -1,0 +1,11 @@
+{
+  "status": "failure",
+  "code": "AMBIGUOUS_TARGET",
+  "stepId": "step-3",
+  "expected": {
+    "frame": "Core workspace",
+    "heading": "Search results"
+  },
+  "observed": "Search results",
+  "evidence": "step-3-surface.json"
+}

@@ -20,7 +20,8 @@
     "check": "npm run typecheck && npm test",
     "format": "prettier --write src tests scripts public config docs/capability.schema.json package.json tsconfig.json .github",
     "format:check": "prettier --check src tests scripts public config docs/capability.schema.json package.json tsconfig.json .github",
-    "start:prod": "node dist/src/server.js"
+    "start:prod": "node dist/src/server.js",
+    "verify:evidence": "tsx scripts/verify-evidence.ts"
   },
   "dependencies": {
     "dotenv": "^17.2.3",

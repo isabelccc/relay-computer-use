@@ -1,5 +1,7 @@
 # Relay
 
+[![Verify core workflow](https://github.com/isabelccc/relay-computer-use/actions/workflows/ci.yml/badge.svg)](https://github.com/isabelccc/relay-computer-use/actions/workflows/ci.yml)
+
 **Discover once. Run reliably.**
 
 Relay turns an LLM's successful interaction with a browser into a typed capability, then executes that capability without any model decisions. It includes a local banking training application, a live operator console, a policy boundary, deterministic replay, and real session takeover.
@@ -94,6 +96,7 @@ npm run check       # strict TypeScript and real Chromium integration tests
 npm run build
 npm run demo        # ten real browser scenarios, no model calls
 npm run schema      # regenerate JSON Schema from Zod
+npm run verify:evidence # audit the included evidence without an API key
 ```
 
 `npm run demo` writes `.runtime/demo-evidence/manifest.json` and per-run evidence. Session and dialog scenarios use an **explicitly labelled scripted operator**, while the handoff mechanism and session are real. The discovery tests inject a scripted model solely for repeatable engine coverage; those tests are not offered as evidence of a live LLM run.

@@ -1,5 +1,5 @@
 {
-  "verifiedAt": "2026-09-15T04:36:54.878846+00:00",
+  "verifiedAt": "2026-09-15T04:38:44.474966+00:00",
   "checks": {
     "strictTypeScript": "passed",
     "tests": {
@@ -13,7 +13,9 @@
       "knownVulnerabilities": 0
     },
     "sourceAndEvidenceSecretScan": "passed",
-    "evidenceArtifactDigestConsistency": "passed for all ten replays and console takeover"
+    "evidenceArtifactDigestConsistency": "passed for all ten replays and console takeover",
+    "checkedInEvidenceAudit": "passed",
+    "localNodeVersion": "25.6.1"
   },
   "liveDiscovery": {
     "status": "success",
@@ -24,5 +26,10 @@
     "inputTokens": 8652,
     "outputTokens": 694
   },
-  "ci": "Workflow included; GitHub-hosted CI has not been run."
+  "ci": {
+    "status": "passed",
+    "runtime": "GitHub-hosted Ubuntu / Node.js 22",
+    "testedCommit": "4ce6e6abd9b5b4c36cdd0f9390b6aa3fb7411b52",
+    "runUrl": "https://github.com/isabelccc/relay-computer-use/actions/runs/34929537829"
+  }
 }

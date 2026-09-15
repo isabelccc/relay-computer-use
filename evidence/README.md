@@ -9,6 +9,8 @@ The current package contains a successful Claude Sonnet 4.6 discovery (six decis
 - `console-handoff/` (when present): a live takeover exercised through the operator console by the development assistant. This is distinguished from the scripted operator in the offline demo.
 - `discovery/` (when present): a successful live API-driven discovery, including actual provider response IDs and usage counts. A failed API attempt is not a successful discovery.
 
+Run `npm run verify:evidence` to independently check the included package. It checks provenance, provider response metadata, artifact digests, every expected outcome, event ordering, output redaction, and zero replay model calls. This is a consistency audit of captured evidence, not a cryptographic attestation by the provider.
+
 ## Reproduce
 
 Start the server with `npm start`. Run `npm run discover -- 10001` with a valid model configuration. Use its emitted artifact to replay another member, then run the scenario suite:

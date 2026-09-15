@@ -1,9 +1,9 @@
 {
-  "verifiedAt": "2026-09-15",
+  "verifiedAt": "2026-09-15T04:36:54.878846+00:00",
   "checks": {
     "strictTypeScript": "passed",
     "tests": {
-      "passed": 28,
+      "passed": 31,
       "failed": 0
     },
     "productionBuild": "passed",
@@ -12,8 +12,17 @@
     "runtimeDependencyAudit": {
       "knownVulnerabilities": 0
     },
-    "sourceAndEvidenceSecretScan": "passed"
+    "sourceAndEvidenceSecretScan": "passed",
+    "evidenceArtifactDigestConsistency": "passed for all ten replays and console takeover"
   },
-  "liveDiscovery": "blocked: ANTHROPIC_WORKSPACE_ID required by configured key",
+  "liveDiscovery": {
+    "status": "success",
+    "provider": "anthropic",
+    "model": "claude-sonnet-4-6",
+    "modelDecisions": 6,
+    "runId": "aa3f27c6-be40-4685-ba98-3e9057616d42",
+    "inputTokens": 8652,
+    "outputTokens": 694
+  },
   "ci": "Workflow included; GitHub-hosted CI has not been run."
 }

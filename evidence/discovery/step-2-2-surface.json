@@ -1,0 +1,50 @@
+{
+  "kind": "redacted-ui-projection",
+  "runId": "aa3f27c6-be40-4685-ba98-3e9057616d42",
+  "stepId": "step-2",
+  "redaction": "Only approved static labels, roles, frame names and bounds are retained. All field values and unrecognized page text are excluded.",
+  "checkpoint": {
+    "frame": "Core workspace",
+    "heading": "Member search"
+  },
+  "controls": [
+    {
+      "id": "c627e75a01ec",
+      "target": {
+        "surface": "browser",
+        "frame": "Core workspace",
+        "strategy": "role",
+        "role": "button",
+        "name": "Search",
+        "rationale": "Exact accessible role and name, scoped to a titled frame; requires one visible match."
+      },
+      "writable": false,
+      "readable": false,
+      "bounds": {
+        "x": 269,
+        "y": 415.96875,
+        "width": 78.03125,
+        "height": 36
+      }
+    },
+    {
+      "id": "d725a21ac6af",
+      "target": {
+        "surface": "browser",
+        "frame": "Core workspace",
+        "strategy": "label",
+        "name": "Member ID",
+        "rationale": "Exact accessible label in the titled frame; independent of element IDs and table position."
+      },
+      "writable": true,
+      "readable": false,
+      "bounds": {
+        "x": 353.953125,
+        "y": 298.984375,
+        "width": 170,
+        "height": 44.796875
+      }
+    }
+  ],
+  "observedAt": "2026-09-15T04:35:11.818Z"
+}

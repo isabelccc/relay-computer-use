@@ -23,6 +23,7 @@ export type Event = {
 /** Only explicitly selected structural fields cross this persistence boundary. */
 export class Evidence {
   readonly events: Event[] = [];
+  private snapshotSequence = 0;
   constructor(
     readonly directory: string,
     readonly runId: string,
@@ -46,7 +47,7 @@ export class Evidence {
     });
   }
   snapshot(observation: Observation, stepId: string): string {
-    const name = `${stepId}-surface.json`;
+    const name = `${stepId}-${++this.snapshotSequence}-surface.json`;
     writeFileSync(
       join(this.directory, name),
       JSON.stringify(

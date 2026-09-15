@@ -1,12 +1,16 @@
 {
-  "generatedAt": "2026-09-15T04:21:01.157Z",
+  "generatedAt": "2026-09-15T04:36:13.637Z",
+  "artifactDigest": "d91935e583a5c655e3e2d698a7fbc8f609e9a9572b8d99396aeda7d54cd2389b",
   "liveDiscovery": {
-    "status": "blocked",
-    "reason": "Anthropic requires a workspace ID for the configured unscoped key. A successful live discovery run has not yet been captured."
+    "status": "success",
+    "runId": "aa3f27c6-be40-4685-ba98-3e9057616d42",
+    "provider": "anthropic",
+    "model": "claude-sonnet-4-6",
+    "modelCalls": 6
   },
   "replays": [
     {
-      "runId": "420af12d-cfdc-4faf-b9a2-5a4b18a2193b",
+      "runId": "e6c82186-aab8-4231-ac0f-6f7867353f7e",
       "scenario": "normal",
       "status": "success",
       "code": "SUCCESS",
@@ -14,7 +18,7 @@
       "operator": null
     },
     {
-      "runId": "6d280753-dc3c-4a15-bcfe-c541f3318495",
+      "runId": "daf085c2-9a31-40bb-9c37-ba5f30cc912c",
       "scenario": "not-found",
       "status": "business_outcome",
       "code": "MEMBER_NOT_FOUND",
@@ -22,7 +26,7 @@
       "operator": null
     },
     {
-      "runId": "1ba4f069-0b25-489c-b87f-e0f194e296ae",
+      "runId": "433598e0-1153-466f-bca8-8e89ae993147",
       "scenario": "transient",
       "status": "success",
       "code": "SUCCESS",
@@ -30,7 +34,7 @@
       "operator": null
     },
     {
-      "runId": "9d7cd3e6-c119-4382-9e4c-3ee8b1b109bf",
+      "runId": "7389e269-5b71-4a07-bf6c-e03994b22441",
       "scenario": "slow",
       "status": "success",
       "code": "SUCCESS",
@@ -38,7 +42,7 @@
       "operator": null
     },
     {
-      "runId": "8fab8507-42c8-47b0-8d40-9d34ec84129d",
+      "runId": "46dceda3-6926-428b-84f8-a07f320b5415",
       "scenario": "permission",
       "status": "failure",
       "code": "PERMISSION_DENIED",
@@ -46,7 +50,7 @@
       "operator": null
     },
     {
-      "runId": "28331897-6538-4fc4-b256-4bd51aa9d63e",
+      "runId": "4292de2a-66f6-4d8b-948b-430532c0d33b",
       "scenario": "app-error",
       "status": "failure",
       "code": "APPLICATION_ERROR",
@@ -54,7 +58,7 @@
       "operator": null
     },
     {
-      "runId": "4b67184d-de4c-480d-8295-4caeb6f3f60c",
+      "runId": "34d4255f-c26b-4a7f-aba6-d821df045f20",
       "scenario": "ambiguous",
       "status": "failure",
       "code": "AMBIGUOUS_TARGET",
@@ -62,7 +66,7 @@
       "operator": null
     },
     {
-      "runId": "21d70580-12e4-4744-9ad1-3c57e8414af6",
+      "runId": "4055b26b-ba0e-4071-a227-973e08aea403",
       "scenario": "drift",
       "status": "failure",
       "code": "CHECKPOINT_TIMEOUT",
@@ -70,7 +74,7 @@
       "operator": null
     },
     {
-      "runId": "4dbda4aa-f286-4aef-8e98-81661b06c3c6",
+      "runId": "0f15fb8f-fe1a-4e04-b0d2-bfbc630aa740",
       "scenario": "session",
       "status": "success",
       "code": "SUCCESS",
@@ -78,7 +82,7 @@
       "operator": "scripted simulation"
     },
     {
-      "runId": "0e695abd-c5cb-466a-a599-f1fec60798a8",
+      "runId": "b44d3810-d8ae-418a-a0d9-2674140fc1b3",
       "scenario": "dialog",
       "status": "success",
       "code": "SUCCESS",
@@ -87,8 +91,8 @@
     }
   ],
   "consoleHandoff": {
-    "runId": "400db487-86e4-4143-99d3-7ff6fb7ae5e3",
-    "operator": "Console exercised by development assistant through browser controls, not a claim that a person performed the demonstration."
+    "runId": "5429a4f1-061a-4de7-87d4-336443176ee3",
+    "operator": "Console actions exercised by the development assistant using browser controls; not a claim that a person performed this demonstration."
   },
   "privacy": "All persisted member outputs are redacted. Screenshots are not stored. Demo handoff runs explicitly label their scripted operator."
 }

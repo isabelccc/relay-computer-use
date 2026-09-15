@@ -1,6 +1,6 @@
 # Run evidence
 
-Read `manifest.json` first. It separates actual browser replay evidence from the live-discovery requirement and records the provenance of the included capability.
+The current package contains a successful Claude Sonnet 4.6 discovery (six decisions), ten zero-model replays of that exact five-step artifact, and a same-session console takeover. Read `manifest.json` first. It separates actual browser replay evidence from the live-discovery requirement and records the provenance of the included capability.
 
 - `capability.json`: saved versioned capability. Its `provenance.kind` says whether it is a hand-authored example or an actual LLM discovery artifact.
 - `replay/<scenario>/events.jsonl`: ordered, timestamped actions, checkpoints, outcomes and control-transfer events from real Chromium sessions.
@@ -19,4 +19,4 @@ npm run demo -- capabilities/member-savings-inquiry.json
 npx tsx scripts/collect-evidence.ts <discovery-id> [console-handoff-run-id]
 ```
 
-The collector requires successful live model provenance when a discovery ID is supplied. Scripted model tests cannot satisfy that check. The offline demo explicitly records `SCRIPTED_OPERATOR_NOT_A_PERSON` for its session/dialog takeover actions. No logs are fabricated or retrospectively rewritten.
+The collector verifies the artifact digest against every replay, all ten expected scenario results, contiguous event sequences, and the absence of model calls in replay. It validates all sources before replacing curated evidence, and copies into fresh directories to exclude stale files. It requires successful live model provenance when a discovery ID is supplied. Scripted model tests cannot satisfy that check. The offline demo explicitly records `SCRIPTED_OPERATOR_NOT_A_PERSON` for its session/dialog takeover actions. No logs are fabricated or retrospectively rewritten.

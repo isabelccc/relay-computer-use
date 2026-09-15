@@ -207,30 +207,32 @@ export class Run {
               evidence,
             };
     } finally {
-      this.status = 'completed';
-      this.lease = undefined;
-      this.intervention = undefined;
-      this.epoch++;
-      this.result ??= { status: 'failure', code: 'INTERNAL_ERROR', stepId: this.stepId };
-      try {
-        this.evidence.log('run_completed', {
-          actor: 'system',
-          code: this.result.status === 'success' ? 'SUCCESS' : this.result.code,
-        });
-        this.evidence.result(this.result);
-      } catch {
-        this.result = { status: 'failure', code: 'EVIDENCE_WRITE_FAILED', stepId: this.stepId };
-      }
-      this.params = {};
-      this.options.params = {};
-      this.options.goal = undefined; // Clear invocation data after completion.
-      try {
-        this.preview = await this.surface?.screenshot();
-      } catch {
-        /* Closed/blocked surfaces have no preview. */
-      }
-      await this.surface?.close().catch(() => {});
-      this.resolveDone(this.result);
+      await this.exclusive(async () => {
+        this.status = 'completed';
+        this.lease = undefined;
+        this.intervention = undefined;
+        this.epoch++;
+        this.result ??= { status: 'failure', code: 'INTERNAL_ERROR', stepId: this.stepId };
+        try {
+          this.evidence.log('run_completed', {
+            actor: 'system',
+            code: this.result.status === 'success' ? 'SUCCESS' : this.result.code,
+          });
+          this.evidence.result(this.result);
+        } catch {
+          this.result = { status: 'failure', code: 'EVIDENCE_WRITE_FAILED', stepId: this.stepId };
+        }
+        this.params = {};
+        this.options.params = {};
+        this.options.goal = undefined; // Clear invocation data after completion.
+        try {
+          this.preview = await this.surface?.screenshot();
+        } catch {
+          /* Closed/blocked surfaces have no preview. */
+        }
+        await this.surface?.close().catch(() => {});
+        this.resolveDone(this.result);
+      });
     }
   }
   private async act(
@@ -342,10 +344,9 @@ export class Run {
         epoch: this.epoch,
       });
     });
-    const timer = setTimeout(
-      () => this.resumeRun?.(false),
-      this.options.policy.config.handoffTimeoutMs,
-    );
+    const timer = setTimeout(() => {
+      void this.exclusive(async () => this.resumeRun?.(false));
+    }, this.options.policy.config.handoffTimeoutMs);
     let ok: boolean;
     try {
       ok = await resume;
@@ -362,6 +363,7 @@ export class Run {
     return this.exclusive(async () => {
       if (this.status !== 'awaiting_human' || !this.intervention)
         throw new ExecutionError('NOT_AWAITING_HUMAN');
+      this.assertInterventionActive();
       this.status = 'human_owned';
       this.lease = randomBytes(24).toString('hex');
       this.epoch++;
@@ -373,6 +375,11 @@ export class Run {
       return { lease: this.lease, epoch: this.epoch };
     });
   }
+  private assertInterventionActive() {
+    if (this.controller.signal.aborted) throw new ExecutionError('CANCELLED');
+    if (!this.intervention || Date.now() >= Date.parse(this.intervention.expiresAt))
+      throw new ExecutionError('HANDOFF_TIMEOUT');
+  }
   private assertLease(lease: string, epoch: number) {
     const a = Buffer.from(lease),
       b = Buffer.from(this.lease ?? '');
@@ -383,12 +390,14 @@ export class Run {
       !timingSafeEqual(a, b)
     )
       throw new ExecutionError('STALE_CONTROL_LEASE');
+    this.assertInterventionActive();
   }
   async humanAction(lease: string, epoch: number, controlId: string, value?: string) {
     return this.exclusive(async () => {
       this.assertLease(lease, epoch);
       if (!this.surface) throw new ExecutionError('SESSION_MISSING');
       const observation = await this.surface.observe();
+      this.assertLease(lease, epoch);
       const control = observation.controls.find((c) => c.id === controlId);
       if (!control) throw new ExecutionError('STALE_CONTROL');
       const action: Action = control.writable
@@ -417,6 +426,7 @@ export class Run {
       this.assertLease(lease, epoch);
       if (!this.surface || !this.intervention) throw new ExecutionError('SESSION_MISSING');
       const cp = await this.surface.checkpoint();
+      this.assertLease(lease, epoch);
       if (
         this.intervention.expected
           ? !same(cp, this.intervention.expected)
@@ -439,8 +449,11 @@ export class Run {
   async cancel() {
     if (this.status === 'completed') return;
     this.controller.abort();
-    this.resumeRun?.(false);
-    this.evidence.log('cancel_requested', { actor: 'system' });
+    await this.exclusive(async () => {
+      if (this.status === 'completed') return;
+      this.evidence.log('cancel_requested', { actor: 'system' });
+      this.resumeRun?.(false);
+    });
   }
   private async replay(): Promise<RunResult> {
     const capability = this.capability;

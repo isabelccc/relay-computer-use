@@ -1,6 +1,6 @@
 {
   "kind": "redacted-ui-projection",
-  "runId": "8fab8507-42c8-47b0-8d40-9d34ec84129d",
+  "runId": "46dceda3-6926-428b-84f8-a07f320b5415",
   "stepId": "step-2",
   "redaction": "Only approved static labels, roles, frame names and bounds are retained. All field values and unrecognized page text are excluded.",
   "checkpoint": {
@@ -8,5 +8,5 @@
     "heading": "Permission denied"
   },
   "controls": [],
-  "observedAt": "2026-09-15T04:20:56.131Z"
+  "observedAt": "2026-09-15T04:35:40.938Z"
 }

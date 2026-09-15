@@ -1,0 +1,32 @@
+{
+  "kind": "redacted-ui-projection",
+  "runId": "daf085c2-9a31-40bb-9c37-ba5f30cc912c",
+  "stepId": "step-2",
+  "redaction": "Only approved static labels, roles, frame names and bounds are retained. All field values and unrecognized page text are excluded.",
+  "checkpoint": {
+    "frame": "Core workspace",
+    "heading": "Member not found"
+  },
+  "controls": [
+    {
+      "id": "919ac777033e",
+      "target": {
+        "surface": "browser",
+        "frame": "Core workspace",
+        "strategy": "role",
+        "role": "button",
+        "name": "Back to search",
+        "rationale": "Exact accessible role and name, scoped to a titled frame; requires one visible match."
+      },
+      "writable": false,
+      "readable": false,
+      "bounds": {
+        "x": 269,
+        "y": 373.984375,
+        "width": 123.390625,
+        "height": 36
+      }
+    }
+  ],
+  "observedAt": "2026-09-15T04:35:38.764Z"
+}

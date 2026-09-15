@@ -41,6 +41,14 @@ export async function serve(
   const token = randomBytes(32).toString('hex');
   let origin = '';
   app.disable('x-powered-by');
+  // Reject DNS rebinding before issuing a cookie or serving any application data.
+  app.use((req, res, next) => {
+    if (!origin || req.headers.host !== new URL(origin).host) {
+      res.status(403).json({ error: 'HOST_BLOCKED' });
+      return;
+    }
+    next();
+  });
   app.use(express.json({ limit: '128kb' }));
   app.use((_req, res, next) => {
     res.set({

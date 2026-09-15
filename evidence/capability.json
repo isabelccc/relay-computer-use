@@ -29,7 +29,7 @@
         "rationale": "Exact accessible label in the titled frame; independent of element IDs and table position."
       },
       "sensitive": true,
-      "description": "Savings balance in USD minor units."
+      "description": "Read available balance from the verified account screen."
     },
     {
       "name": "accountStatus",
@@ -42,7 +42,7 @@
         "rationale": "Exact accessible label in the titled frame; independent of element IDs and table position."
       },
       "sensitive": true,
-      "description": "Current account status."
+      "description": "Read account status from the verified account screen."
     }
   ],
   "steps": [
@@ -168,10 +168,10 @@
   },
   "policyId": "northstar-read-only-v1",
   "provenance": {
-    "kind": "hand-authored-example",
-    "provider": "none",
-    "model": "none",
-    "runId": "example",
-    "createdAt": "2026-09-15T00:00:00.000Z"
+    "kind": "llm-discovery",
+    "provider": "anthropic",
+    "model": "claude-sonnet-4-6",
+    "runId": "aa3f27c6-be40-4685-ba98-3e9057616d42",
+    "createdAt": "2026-09-15T04:35:25.337Z"
   }
 }

@@ -1,32 +1,32 @@
 {
   "kind": "redacted-ui-projection",
-  "runId": "6d280753-dc3c-4a15-bcfe-c541f3318495",
-  "stepId": "step-2",
+  "runId": "5429a4f1-061a-4de7-87d4-336443176ee3",
+  "stepId": "step-3",
   "redaction": "Only approved static labels, roles, frame names and bounds are retained. All field values and unrecognized page text are excluded.",
   "checkpoint": {
     "frame": "Core workspace",
-    "heading": "Member not found"
+    "heading": "Session expired"
   },
   "controls": [
     {
-      "id": "919ac777033e",
+      "id": "c1d55fb3c31b",
       "target": {
         "surface": "browser",
         "frame": "Core workspace",
         "strategy": "role",
         "role": "button",
-        "name": "Back to search",
+        "name": "Restore session",
         "rationale": "Exact accessible role and name, scoped to a titled frame; requires one visible match."
       },
       "writable": false,
       "readable": false,
       "bounds": {
         "x": 269,
-        "y": 373.984375,
-        "width": 123.390625,
+        "y": 333.984375,
+        "width": 130.71875,
         "height": 36
       }
     }
   ],
-  "observedAt": "2026-09-15T04:20:54.116Z"
+  "observedAt": "2026-09-15T04:35:43.566Z"
 }

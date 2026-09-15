@@ -113,9 +113,11 @@ export class AnthropicModel implements DecisionModel {
       const message = failure?.error?.message ?? '';
       const code = message.includes('anthropic-workspace-id')
         ? 'MODEL_WORKSPACE_REQUIRED'
-        : message.toLowerCase().includes('credit balance')
-          ? 'MODEL_CREDITS_REQUIRED'
-          : `MODEL_HTTP_${response.status}`;
+        : /workspace.*not found/i.test(message)
+          ? 'MODEL_WORKSPACE_NOT_FOUND'
+          : message.toLowerCase().includes('credit balance')
+            ? 'MODEL_CREDITS_REQUIRED'
+            : `MODEL_HTTP_${response.status}`;
       throw new ExecutionError(code);
     }
     const parsed = z

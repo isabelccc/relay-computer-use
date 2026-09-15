@@ -32,7 +32,7 @@ Hundreds of institutions would add a capability registry, signed approvals, per-
 
 # Escalation & handoff
 
-Ownership moves through `running → awaiting_human → human_owned → running`, or to terminal completion. A serialized control boundary prevents automation and operator actions from overlapping. Claiming issues an unpredictable lease bound to an incrementing epoch; concurrent claims have one winner. Stale tokens and epochs are rejected. The intervention includes the run, step, reason, observed screen, expected checkpoint and expiry.
+Ownership moves through `running → awaiting_human → human_owned → running`, or to terminal completion. A serialized control boundary prevents automation and operator actions from overlapping. Claiming issues an unpredictable lease bound to an incrementing epoch; concurrent claims have one winner. Stale tokens, expired leases and epochs are rejected. Cancellation and expiry drain an in-flight operator action before terminal cleanup, with no subsequent dispatch. The intervention includes the run, step, reason, observed screen, expected checkpoint and expiry.
 
 The operator sees a live screenshot and uses controls that act on the same Playwright page. Input state and selected member survive takeover. Human actions use the same policy and evidence boundary. Resume checks the expected checkpoint before returning ownership; it does not simply skip a failed step. Pauses have a five-minute timeout and a bounded count. Reloading the console loses the in-memory operator lease, requiring cancellation rather than unsafe reassignment.
 
@@ -40,7 +40,7 @@ The console is minimal, but its control transfer is real. The Northstar “Resto
 
 # Safety
 
-Policy is trusted configuration, independent of artifacts and model output. It restricts origin, exact routes, methods, action types, fill fields, read fields and action labels. Browser traffic to the control plane or external origins is blocked. Redirects, WebSockets, popups and downloads are rejected; service workers are disabled. Transaction controls are denied to both actors. The loopback-only API uses a random bearer token or HttpOnly SameSite cookie, origin checks and a mutation header. This is a local OS trust boundary, not internet-facing authentication.
+Policy is trusted configuration, independent of artifacts and model output. It restricts origin, exact routes, methods, action types, fill fields, read fields and action labels. Browser traffic to the control plane or external origins is blocked. Redirects, WebSockets, popups and downloads are rejected; service workers are disabled. Transaction controls are denied to both actors. The loopback-only API uses a random bearer token or HttpOnly SameSite cookie, strict Host/origin checks and a mutation header. This is a local OS trust boundary, not internet-facing authentication.
 
 Artifacts and evidence contain no invocation values, credentials, account balances, member names or raw model transcripts. Account outputs go to the caller but are redacted on disk. Screenshots remain in memory for the local operator, with bounded run history. Only reviewed static vocabulary enters model observations. Goal redaction covers known identifiers, emails and token patterns; arbitrary free text is not a solved PII-detection problem, so goals must use parameter names and synthetic data.
 

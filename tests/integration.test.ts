@@ -371,3 +371,91 @@ test('cancellation while waiting for a slow UI reports cancellation, not interna
   await r.done;
   assert.equal(r.result?.status === 'failure' && r.result.code, 'CANCELLED');
 });
+
+test('unexpected Host is rejected before setting the operator cookie', async () => {
+  const { request } = await import('node:http');
+  const response = await new Promise<{ status: number | undefined; cookie: unknown }>(
+    (resolve, reject) => {
+      const req = request(service.origin + '/', { headers: { Host: 'attacker.test' } }, (res) => {
+        res.resume();
+        res.on('end', () => resolve({ status: res.statusCode, cookie: res.headers['set-cookie'] }));
+      });
+      req.on('error', reject);
+      req.end();
+    },
+  );
+  assert.equal(response.status, 403);
+  assert.equal(response.cookie, undefined);
+});
+
+test('cancellation during operator observation blocks dispatch and drains ownership', async () => {
+  const r = run('session', { allowHandoff: true });
+  await until(() => r.status === 'awaiting_human');
+  const lease = await r.claim();
+  assert.ok(r.surface);
+  const surface = r.surface;
+  const original = surface.observe.bind(surface);
+  const control = (await original()).controls.find((c) => c.target.name === 'Restore session');
+  assert.ok(control);
+  let release!: () => void;
+  const gate = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  let entered = false;
+  surface.observe = async () => {
+    entered = true;
+    await gate;
+    return original();
+  };
+  const action = r.humanAction(lease.lease, lease.epoch, control.id);
+  const rejected = assert.rejects(action, /CANCELLED/);
+  await until(() => entered);
+  const cancellation = r.cancel();
+  release();
+  await Promise.all([rejected, cancellation, r.done]);
+  assert.equal(r.result?.status === 'failure' && r.result.code, 'CANCELLED');
+  assert.equal(
+    r.evidence.events.filter((e) => e.actor === 'human' && e.type === 'action_started').length,
+    0,
+  );
+  assert.equal(r.evidence.events.at(-1)?.type, 'run_completed');
+});
+
+test('handoff expiry drains an in-flight operator action before completion', async () => {
+  const r = run('session', {
+    allowHandoff: true,
+    policy: new Policy(service.origin, { ...defaultPolicy, handoffTimeoutMs: 500 }),
+  });
+  await until(() => r.status === 'awaiting_human');
+  const lease = await r.claim();
+  assert.ok(r.surface);
+  const surface = r.surface;
+  const control = (await surface.observe()).controls.find(
+    (c) => c.target.name === 'Restore session',
+  );
+  assert.ok(control);
+  const original = surface.perform.bind(surface);
+  let release!: () => void;
+  const gate = new Promise<void>((resolve) => {
+    release = resolve;
+  });
+  let entered = false;
+  surface.perform = async (...args) => {
+    entered = true;
+    await gate;
+    return original(...args);
+  };
+  const action = r.humanAction(lease.lease, lease.epoch, control.id);
+  await until(() => entered);
+  await delay(550);
+  assert.equal(r.status, 'human_owned');
+  release();
+  await Promise.all([action, r.done]);
+  assert.equal(r.result?.status === 'failure' && r.result.code, 'HANDOFF_TIMEOUT');
+  const events = r.evidence.events;
+  const ended = events.findIndex((e) => e.actor === 'human' && e.type === 'action_completed');
+  assert.ok(ended >= 0 && ended < events.findIndex((e) => e.type === 'run_completed'));
+  assert.equal(events.at(-1)?.type, 'run_completed');
+  const snapshots = readdirSync(r.evidence.directory).filter((f) => f.endsWith('-surface.json'));
+  assert.equal(snapshots.length, 2, 'intervention and terminal evidence are both retained');
+});

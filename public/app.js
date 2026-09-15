@@ -14,7 +14,8 @@ let runs = [],
   busy = false,
   lastScreenshot = '',
   config = null,
-  handoffSignature = '';
+  handoffSignature = '',
+  runCapability = null;
 const pretty = (s) =>
   String(s)
     .replaceAll('_', ' ')
@@ -56,7 +57,8 @@ function state(r) {
       ? ['attention', 'NEEDS OPERATOR']
       : ['running', 'RUNNING'];
 }
-function openRun(mode = 'replay') {
+function openRun(mode = 'replay', capability = selected()?.capability || catalog[0]) {
+  runCapability = capability;
   if (config?.targetUrl) $('#run-form').elements.targetUrl.value = config.targetUrl;
   $('#run-form').elements.mode.value = mode;
   $('#goal-field').hidden = mode !== 'discovery';
@@ -110,7 +112,7 @@ function renderTimeline(r) {
     : '<p class="muted">A run’s verified actions and checkpoints will appear here.</p>';
 }
 function renderArtifact(r) {
-  const c = r?.capability || catalog[0];
+  const c = r?.mode === 'discovery' ? r.capability : r?.capability || catalog[0];
   $('#artifact-tab').innerHTML = c
     ? `<div class="artifact-meta"><span>${esc(c.id)} · v${esc(c.version)}</span><button id="download-artifact" class="button subtle">Download JSON ↓</button></div><p class="muted">${c.provenance.kind === 'llm-discovery' ? 'Recorded from a genuine model-driven run.' : 'Hand-authored starter example. Run discovery to record your own.'}</p><pre class="code-view">${esc(JSON.stringify(c, null, 2))}</pre>`
     : '<p class="muted">A successful discovery saves the executable capability here.</p>';
@@ -136,7 +138,16 @@ function renderResult(r) {
     const out = r.result.outputs;
     box.innerHTML = `<h3>CHECKPOINT VERIFIED · OUTPUTS RETURNED</h3><div class="result-grid"><div><small>AVAILABLE BALANCE</small><b>${out.availableBalance ? new Intl.NumberFormat('en-US', { style: 'currency', currency: out.availableBalance.currency }).format(out.availableBalance.minorUnits / 100) : '—'}</b></div><div><small>ACCOUNT STATUS</small><b>${esc(out.accountStatus || '—')}</b></div></div>`;
   } else {
-    box.innerHTML = `<h3>${esc(r.result.status === 'business_outcome' ? 'EXPECTED BUSINESS OUTCOME' : 'EXECUTION STOPPED')}</h3><p>${esc(pretty(r.result.code))}</p><p>At ${esc(r.result.stepId)}${r.result.observed ? ' · Observed: ' + esc(r.result.observed) : ''}</p>`;
+    const advice = {
+      MODEL_WORKSPACE_REQUIRED:
+        'Set the workspace ID belonging to your Anthropic key in the local .env file, then start a new discovery.',
+      MODEL_WORKSPACE_NOT_FOUND:
+        'The API key cannot access the configured workspace. Use a matching workspace ID or workspace-scoped key.',
+      MODEL_CREDITS_REQUIRED:
+        'Add API credits in the Claude Console account that owns this key, then retry discovery.',
+      MODEL_KEY_MISSING: 'Add an authorized model API key to the local .env file.',
+    }[r.result.code];
+    box.innerHTML = `<h3>${esc(r.result.status === 'business_outcome' ? 'EXPECTED BUSINESS OUTCOME' : 'EXECUTION STOPPED')}</h3><p>${esc(pretty(r.result.code))}</p><p>At ${esc(r.result.stepId)}${r.result.observed ? ' · Observed: ' + esc(r.result.observed) : ''}</p>${advice ? '<p>' + esc(advice) + '</p>' : ''}`;
   }
 }
 function renderHandoff(r) {
@@ -242,7 +253,11 @@ function render() {
   $('#detail-status').textContent = label;
   $('#detail-title').textContent = r
     ? r.mode === 'discovery'
-      ? 'Discovering member inquiry'
+      ? r.status === 'completed'
+        ? r.result?.status === 'success'
+          ? 'Discovered member inquiry'
+          : 'Discovery stopped'
+        : 'Discovering member inquiry'
       : 'Member savings inquiry'
     : 'Member savings inquiry';
   $('#ownership').textContent =
@@ -256,7 +271,18 @@ function render() {
   $('#detail-actions').innerHTML =
     r?.status === 'completed' && r.capability
       ? '<button id="replay-this" class="button secondary">Replay ↻</button>'
-      : '';
+      : r && ['queued', 'running'].includes(r.status)
+        ? '<button id="stop-active" class="button secondary">Stop run</button>'
+        : '';
+  if ($('#stop-active'))
+    $('#stop-active').onclick = async () => {
+      try {
+        await api(`/runs/${r.id}/cancel`, {});
+        await refresh();
+      } catch (error) {
+        toast(error.message);
+      }
+    };
   if ($('#replay-this')) $('#replay-this').onclick = () => openRun('replay');
   $('#session-caption').textContent = r
     ? `${r.status === 'completed' ? 'Final session frame' : 'Live browser'} · ${r.modelCalls} model calls · ${r.stepId}`
@@ -302,7 +328,7 @@ function renderCatalog() {
         selectedId =
           runs.find((r) => r.capability?.provenance.runId === c.provenance.runId)?.id ?? null;
         showPage('operations');
-        openRun('replay');
+        openRun('replay', c);
       }),
   );
   $('#cap-count').textContent = String(unique.length);
@@ -361,7 +387,7 @@ $('#run-form').onsubmit = async (e) => {
     variant: data.get('variant'),
   };
   if (body.mode === 'discovery') body.goal = data.get('goal');
-  else if (selected()?.capability) body.capability = selected().capability;
+  else if (runCapability) body.capability = runCapability;
   try {
     const result = await api('/runs', body);
     selectedId = result.id;

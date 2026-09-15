@@ -59,4 +59,4 @@ const c = CapabilitySchema.parse({
     createdAt: '2026-09-15T00:00:00.000Z',
   },
 });
-writeFileSync('capabilities/member-savings-inquiry.json', JSON.stringify(c, null, 2));
+writeFileSync('examples/member-savings-inquiry.json', JSON.stringify(c, null, 2));

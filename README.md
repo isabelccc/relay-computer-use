@@ -6,6 +6,17 @@ Relay turns an LLM's successful interaction with a browser into a typed capabili
 
 The proxy application contains **only synthetic data**. It deliberately uses an iframe and tables without test IDs. Member information is read from visible controls, never a member-data API.
 
+## Verified end to end
+
+The included capability was discovered by **Claude Sonnet 4.6 through six real API decisions**, compiled into five parameterized steps, and replayed against another synthetic member with **zero model calls**. All ten scenario checks passed with their expected success, business-outcome, or failure codes. A separate console demonstration exercised claim → same-session repair → validated resume.
+
+- [Live discovery evidence](evidence/discovery/events.jsonl) includes provider response IDs and token usage.
+- [Recorded capability](capabilities/member-savings-inquiry.json) is the exact artifact used by the replay suite.
+- [Evidence manifest](evidence/manifest.json) records provenance and the artifact digest.
+- [Design report](REPORT.md) covers the seven requested design topics and explicit limitations.
+
+The test suite has **31 passing checks**. Automated operator simulations are labelled in their logs; the console demonstration was operated by the development assistant. The separate [hand-authored example](examples/member-savings-inquiry.json) remains available for comparison.
+
 ## Quick start
 
 Requires Node.js 22+ and npm. Tested with Node 22 and Chromium.
@@ -74,7 +85,7 @@ Use parameter names in goals; supply values in the private parameter object. Do 
 
 This controls the **same Playwright page and browser context**, preserving the selected member. It does not launch another session or replay the already-issued navigation. Operator actions are logged without input values. Risky transaction controls remain blocked for both automation and operators. The training restore button simulates successful reauthentication; a real identity provider is intentionally out of scope.
 
-A lease is exclusive and bound to a control epoch; stale or incorrect leases fail. A browser refresh loses the operator's in-memory lease, so use **Stop run** and start again if that happens. Interventions time out after five minutes. There is no automatic lease stealing.
+A lease is exclusive and bound to a control epoch; stale, expired or incorrect leases fail. Cancellation and expiry drain any already-started operator action before closing the session; no further action is dispatched. Active runs can be stopped from the console. A browser refresh loses the operator's in-memory lease, so use **Stop run** and start again if that happens. Interventions time out after five minutes. There is no automatic lease stealing.
 
 ## Demo and checks without live services
 
@@ -116,12 +127,13 @@ Sensitive outputs are returned to the local caller and displayed in the local co
 - `src/model.ts`: Anthropic and OpenAI decision adapters.
 - `src/evidence.ts`: structural evidence and redacted result persistence.
 - `src/server.ts`, `public/`: local API, operator console, and synthetic legacy-style application.
-- `capabilities/`: reviewed runnable examples or captured discovery artifacts; provenance identifies their source.
+- `capabilities/`: the captured live-discovery artifact used by default.
+- `examples/`: the separately labelled hand-authored starter; the seed script writes only here.
 - `evidence/`: curated submission evidence; see its manifest and README.
 - `tests/`: safety boundaries, replay failures, actual browser behavior and ownership races.
 
 ## Local service boundary
 
-The service binds to loopback only. The UI uses an HttpOnly, SameSite cookie; CLI requests use a random token stored in `.runtime/client.json` with mode 0600. Mutations require a custom header, and cross-origin requests are rejected. The automated browser has an isolated context with no operator cookie; a network allowlist blocks all control-plane routes and external traffic. Up to three runs can execute at once, and the in-memory history is capped at 40 runs.
+The service binds to loopback only. The UI uses an HttpOnly, SameSite cookie; CLI requests use a random token stored in `.runtime/client.json` with mode 0600. Mutations require a custom header; unexpected Host headers and cross-origin requests are rejected before access is granted. The automated browser has an isolated context with no operator cookie; a network allowlist blocks all control-plane routes and external traffic. Up to three runs can execute at once, and the in-memory history is capped at 40 runs.
 
 This is a focused local system, not a hosted multi-user service. Anyone with local OS access is inside its trust boundary. See **Safety** and **Cuts** in the report for the deployment limitations.

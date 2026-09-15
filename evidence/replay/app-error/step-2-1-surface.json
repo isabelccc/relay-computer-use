@@ -1,6 +1,6 @@
 {
   "kind": "redacted-ui-projection",
-  "runId": "28331897-6538-4fc4-b256-4bd51aa9d63e",
+  "runId": "4292de2a-66f6-4d8b-948b-430532c0d33b",
   "stepId": "step-2",
   "redaction": "Only approved static labels, roles, frame names and bounds are retained. All field values and unrecognized page text are excluded.",
   "checkpoint": {
@@ -8,5 +8,5 @@
     "heading": "Application error"
   },
   "controls": [],
-  "observedAt": "2026-09-15T04:20:56.422Z"
+  "observedAt": "2026-09-15T04:35:41.325Z"
 }
